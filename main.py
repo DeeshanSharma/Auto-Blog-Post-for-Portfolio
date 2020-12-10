@@ -5,6 +5,8 @@ Purpose: Purpose of this app is to avoid rewriting the same code again and again
 '''
 
 import re
+import os
+
 
 def readblog(File='blog.txt'):
     rawblog = ''
@@ -12,11 +14,12 @@ def readblog(File='blog.txt'):
         rawblog = f.read()
     return rawblog
 
+
 def process(rawblog):
     filename = re.findall(r'^%fn%(.*?)%fn%$', rawblog, re.MULTILINE)[0]
-    title = re.findall(r'^%t%(.*?)%t%$',rawblog, re.MULTILINE)[0]
-    header = re.findall(r'^%h%(.*?)%h%',rawblog, re.MULTILINE)[0]
-    span = re.findall(r'%s%(.*?)%s%$',rawblog, re.MULTILINE)[0]
+    title = re.findall(r'^%t%(.*?)%t%$', rawblog, re.MULTILINE)[0]
+    header = re.findall(r'^%h%(.*?)%h%', rawblog, re.MULTILINE)[0]
+    span = re.findall(r'%s%(.*?)%s%$', rawblog, re.MULTILINE)[0]
     desc = re.findall(r'^%d%(.*?)%d%', rawblog, re.MULTILINE)[0]
     content = rawblog.split('%p%')[1]
 
@@ -115,10 +118,23 @@ def process(rawblog):
     blog = f"{header_code}{footer_code}"
     return filename, blog
 
+
 def writehtml(filename, blog):
     with open(filename, 'w') as w:
         w.write(blog)
 
+
+def movefile(filename):
+    dest = ''
+    sysos = os.name
+    if 'nt' in sysos.lower():
+        dest = f'D:/Code/HTML & CSS/Portfolio/blogs/{filename}'
+    else:
+        dest = f'/mnt/d/Code/HTML & CSS/Portfolio/blogs/{filename}'
+    os.replace(filename, dest)
+
+
 rawblog = readblog()
 filename, blog = process(rawblog)
 writehtml(filename, blog)
+movefile(filename)
