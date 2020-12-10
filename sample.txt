@@ -1,0 +1,5 @@
+%fn%samplefile.name%fn%
+%t%This is title%t%
+%h%This is Header %h%%s%with span%s%
+%d%This is description%d%
+%p%This is the sample raw blog content for the demonstration of the syntax to use in the raw blog file
