@@ -22,6 +22,7 @@ def process(rawblog):
     span = re.findall(r'%s%(.*?)%s%$', rawblog, re.MULTILINE)[0]
     desc = re.findall(r'^%d%(.*?)%d%', rawblog, re.MULTILINE)[0]
     content = rawblog.split('%p%')[1]
+    link = re.findall(r'^%l%(.*?)%l%', rawblog, re.MULTILINE)[0]
 
     header_code = f'''<!DOCTYPE html>
 <html lang="en">
@@ -56,6 +57,8 @@ def process(rawblog):
 		<section class="section">
 			<div class="container purple-section blog">
 				<p>{content}</p>
+				<br /><br />
+				{link}
 '''
 
     footer_code = '''			</div>
