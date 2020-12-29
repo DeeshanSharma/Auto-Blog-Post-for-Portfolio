@@ -3,3 +3,4 @@
 %h%This is Header %h%%s%with span%s%
 %d%This is description%d%
 %p%This is the sample raw blog content for the demonstration of the syntax to use in the raw blog file
+%l%<a href="">This is the sample link for the bottom buttons on the blog page</a>%l%
